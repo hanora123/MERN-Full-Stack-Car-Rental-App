@@ -35,4 +35,32 @@ router.get("/getallusers", async (req, res) => {
   }
 });
 
+router.post("/adduser", async (req, res) => {
+  try {
+    const newuser = new User(req.body);
+    await newuser.save();
+    res.send(newuser);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.put("/edituser", async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true });
+    res.send(user);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.delete("/deleteuser", async (req, res) => {
+  try {
+    await User.findOneAndDelete({ _id: req.body.userid });
+    res.send("User deleted successfully");
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 module.exports = router;

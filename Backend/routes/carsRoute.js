@@ -20,4 +20,33 @@ router.get("/:carId", async (req, res) => {
   }
 });
 
+router.post("/addcar", async (req, res) => {
+  try {
+    const newcar = new Car(req.body);
+    await newcar.save();
+    res.send(newcar);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.put("/editcar", async (req, res) => {
+  try {
+    const car = await Car.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true });
+    res.send(car);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.delete("/deletecar", async (req, res) => {
+  try {
+    await Car.findOneAndDelete({ _id: req.body.carid });
+
+    res.send("Car deleted successfully");
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 module.exports = router;

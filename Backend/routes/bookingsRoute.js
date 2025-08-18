@@ -25,4 +25,13 @@ router.get("/getallbookings", async (req, res) => {
   }
 });
 
+router.delete("/deletebooking", async (req, res) => {
+  try {
+    await Booking.findOneAndDelete({ _id: req.body.bookingid });
+    res.send("Booking deleted successfully");
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 module.exports = router;

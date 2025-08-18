@@ -8,6 +8,10 @@ This is a full-stack car rental application built with the MERN stack (MongoDB, 
 - **Detailed Car Views:** Each car has a dedicated details page showing technical specifications, images, and rental price.
 - **User Authentication:** A complete user registration and login system.
 - **Booking System:** Users can select a car and book it for a specific date range. The system calculates the total price and records the booking.
+- **Admin Dashboard:** A comprehensive dashboard for administrators to manage the application's data.
+  - **Car Management:** Add, edit, and delete cars from the inventory.
+  - **User Management:** Add, edit, and delete users.
+  - **Booking Management:** View and cancel customer bookings.
 - **Responsive Design:** The UI is fully responsive and works seamlessly on desktop, tablet, and mobile devices.
 
 ## Tech Stack
@@ -43,6 +47,7 @@ The project is organized into two main directories:
 └── tailwindcss/    # Contains the React frontend application
     ├── public/     # Public assets
     └── src/
+        ├── admin/      # Admin dashboard components (Dashboard, CarList, etc.)
         ├── components/ # Reusable React components (CarCard, Header, etc.)
         ├── data/       # (Legacy) Static data, now replaced by backend calls
         ├── pages/      # Page-level components (Home, Vehicles, Login, etc.)
@@ -106,16 +111,27 @@ To get this project up and running on your local machine, follow these steps.
 
 The backend provides the following RESTful API endpoints:
 
+### Public & User Routes
 -   `GET /api/cars/getallcars`: Fetches a list of all cars.
 -   `GET /api/cars/:carId`: Fetches details for a single car by its ID.
 -   `POST /api/users/login`: Authenticates a user.
 -   `POST /api/users/register`: Registers a new user.
 -   `POST /api/bookings/bookcar`: Creates a new car booking.
 
+### Admin Routes
+-   `GET /api/users/getallusers`: Fetches a list of all users.
+-   `POST /api/cars/addcar`: Adds a new car.
+-   `PUT /api/cars/editcar`: Updates an existing car's details.
+-   `POST /api/cars/deletecar`: Deletes a car (expects `carid` in the body).
+-   `POST /api/users/adduser`: Adds a new user.
+-   `PUT /api/users/edituser`: Updates an existing user's details.
+-   `POST /api/users/deleteuser`: Deletes a user (expects `userid` in the body).
+-   `GET /api/bookings/getallbookings`: Fetches all bookings.
+-   `POST /api/bookings/deletebooking`: Deletes a booking (expects `bookingid` in the body).
+
 ## Future Improvements
 
 -   **User Profiles:** Allow users to view their booking history.
--   **Admin Panel:** Create a dashboard for administrators to manage cars, users, and bookings.
 -   **Real-time Availability:** Implement checks to prevent double-booking of cars for the same date range.
 -   **Payment Integration:** Integrate a payment gateway like Stripe or PayPal.
 -   **JWT Authentication:** Replace the current basic authentication with JSON Web Tokens for better security.
