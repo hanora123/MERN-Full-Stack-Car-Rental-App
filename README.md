@@ -1,16 +1,16 @@
 # React Car Rental App
 
-This is a full-stack car rental application built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS. It provides a user-friendly interface for browsing, selecting, and booking rental cars.
+This is a full-stack car rental application built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS. It provides a user-friendly interface for browsing, selecting, and booking rental cars, along with a comprehensive admin dashboard for managing the application's data.
 
 ## Features
 
-- **Browse & Filter Vehicles:** Users can view a comprehensive catalog of available cars and filter them by brand, gearbox type, and price.
+- **Browse & Filter Vehicles:** Users can view a comprehensive catalog of available cars.
 - **Detailed Car Views:** Each car has a dedicated details page showing technical specifications, images, and rental price.
 - **User Authentication:** A complete user registration and login system.
-- **Booking System:** Users can select a car and book it for a specific date range. The system calculates the total price and records the booking.
+- **Booking System:** Users can select a car and book it. The system calculates the total price and records the booking.
 - **Admin Dashboard:** A comprehensive dashboard for administrators to manage the application's data.
-  - **Car Management:** Add, edit, and delete cars from the inventory.
-  - **User Management:** Add, edit, and delete users.
+  - **Car Management:** Full CRUD (Create, Read, Update, Delete) functionality for cars.
+  - **User Management:** Full CRUD functionality for users.
   - **Booking Management:** View and cancel customer bookings.
 - **Responsive Design:** The UI is fully responsive and works seamlessly on desktop, tablet, and mobile devices.
 
