@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Button hover effect */
+  .btn-hover {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  .btn-hover:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+
+  /* Car card hover effect */
+  .card-hover {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  .card-hover:hover {
+    @apply transform -translate-y-2 shadow-xl;
+  }
+
+  /* Navigation link hover effect */
+  .link-hover {
+    @apply relative inline-block;
+  }
+  .link-hover::after {
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600 transform scale-x-0 transition-transform duration-300 ease-in-out;
+    content: '';
+  }
+  .link-hover:hover::after {
+    @apply transform scale-x-100;
+  }
+}
