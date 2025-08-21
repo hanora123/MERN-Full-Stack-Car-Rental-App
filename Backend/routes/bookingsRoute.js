@@ -34,4 +34,13 @@ router.delete("/deletebooking", async (req, res) => {
   }
 });
 
+router.put("/editbooking", async (req, res) => {
+  try {
+    const updatedBooking = await Booking.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true });
+    res.send(updatedBooking);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
 module.exports = router;

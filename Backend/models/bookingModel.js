@@ -10,7 +10,7 @@ const bookingSchema = new mongoose.Schema(
     },
     totalDays: { type: Number, required: true },
     totalAmount: { type: Number, required: true },
-    transactionId: { type: String, required: true },
+    transactionId: { type: String },
   },
   { timestamps: true }
 );

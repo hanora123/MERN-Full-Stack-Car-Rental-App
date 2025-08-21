@@ -7,11 +7,11 @@ This is a full-stack car rental application built with the MERN stack (MongoDB, 
 - **Browse & Filter Vehicles:** Users can view a comprehensive catalog of available cars.
 - **Detailed Car Views:** Each car has a dedicated details page showing technical specifications, images, and rental price.
 - **User Authentication:** A complete user registration and login system.
-- **Booking System:** Users can select a car and book it. The system calculates the total price and records the booking.
+- **Booking System:** Users can select a car and book it for a specific date range.
 - **Admin Dashboard:** A comprehensive dashboard for administrators to manage the application's data.
   - **Car Management:** Full CRUD (Create, Read, Update, Delete) functionality for cars.
-  - **User Management:** Full CRUD functionality for users.
-  - **Booking Management:** View and cancel customer bookings.
+  - **User Management:** Full CRUD functionality for users, including the ability to assign **Admin** or **User** roles.
+  - **Booking Management:** Full CRUD functionality for bookings, allowing admins to create, view, update, and delete reservations on behalf of users.
 - **Responsive Design:** The UI is fully responsive and works seamlessly on desktop, tablet, and mobile devices.
 
 ## Tech Stack
@@ -22,8 +22,6 @@ This is a full-stack car rental application built with the MERN stack (MongoDB, 
 - **Express:** Web framework for Node.js, used to build the RESTful API.
 - **MongoDB:** NoSQL database for storing car, user, and booking information.
 - **Mongoose:** Object Data Modeling (ODM) library for MongoDB and Node.js.
-- **`dotenv`:** For managing environment variables.
-- **`cors`:** To enable Cross-Origin Resource Sharing.
 
 ### Frontend
 
@@ -47,10 +45,8 @@ The project is organized into two main directories:
 └── tailwindcss/    # Contains the React frontend application
     ├── public/     # Public assets
     └── src/
-        ├── admin/      # Admin dashboard components (Dashboard, CarList, etc.)
-        ├── components/ # Reusable React components (CarCard, Header, etc.)
-        ├── data/       # (Legacy) Static data, now replaced by backend calls
-        ├── pages/      # Page-level components (Home, Vehicles, Login, etc.)
+        ├── components/ # Reusable React components (CarCard, Header, Modal, etc.)
+        ├── pages/      # Page-level components (Home, Vehicles, Login, Admin, etc.)
         └── App.js      # Main application component with routing
 ```
 
@@ -76,18 +72,14 @@ To get this project up and running on your local machine, follow these steps.
     npm install
     ```
 
-3.  **Create Environment File:**
-    Create a `.env` file in the `Backend` directory and add your MongoDB connection string and a port number.
-    ```
-    MONGO_URI=your_mongodb_connection_string
-    PORT=5000
-    ```
+3.  **Configure Environment:**
+    The backend connects to a MongoDB database. The connection string is hardcoded in `config/db.js`. Please update it with your own MongoDB URI.
 
 4.  **Start the Backend Server:**
     ```bash
-    npm start
+    node server.js
     ```
-    The server will start on the port you specified (e.g., `http://localhost:5000`).
+    The server will start on port 5000 (`http://localhost:5000`).
 
 ### 2. Frontend Setup
 
@@ -111,27 +103,22 @@ To get this project up and running on your local machine, follow these steps.
 
 The backend provides the following RESTful API endpoints:
 
-### Public & User Routes
+### Cars
 -   `GET /api/cars/getallcars`: Fetches a list of all cars.
--   `GET /api/cars/:carId`: Fetches details for a single car by its ID.
+-   `POST /api/cars/addcar`: (Admin) Adds a new car.
+-   `PUT /api/cars/editcar`: (Admin) Updates an existing car.
+-   `DELETE /api/cars/deletecar`: (Admin) Deletes a car.
+
+### Users
 -   `POST /api/users/login`: Authenticates a user.
 -   `POST /api/users/register`: Registers a new user.
+-   `GET /api/users/getallusers`: (Admin) Fetches a list of all users.
+-   `POST /api/users/adduser`: (Admin) Adds a new user.
+-   `PUT /api/users/edituser`: (Admin) Updates an existing user (including their role).
+-   `DELETE /api/users/deleteuser`: (Admin) Deletes a user.
+
+### Bookings
 -   `POST /api/bookings/bookcar`: Creates a new car booking.
-
-### Admin Routes
--   `GET /api/users/getallusers`: Fetches a list of all users.
--   `POST /api/cars/addcar`: Adds a new car.
--   `PUT /api/cars/editcar`: Updates an existing car's details.
--   `POST /api/cars/deletecar`: Deletes a car (expects `carid` in the body).
--   `POST /api/users/adduser`: Adds a new user.
--   `PUT /api/users/edituser`: Updates an existing user's details.
--   `POST /api/users/deleteuser`: Deletes a user (expects `userid` in the body).
--   `GET /api/bookings/getallbookings`: Fetches all bookings.
--   `POST /api/bookings/deletebooking`: Deletes a booking (expects `bookingid` in the body).
-
-## Future Improvements
-
--   **User Profiles:** Allow users to view their booking history.
--   **Real-time Availability:** Implement checks to prevent double-booking of cars for the same date range.
--   **Payment Integration:** Integrate a payment gateway like Stripe or PayPal.
--   **JWT Authentication:** Replace the current basic authentication with JSON Web Tokens for better security.
+-   `GET /api/bookings/getallbookings`: (Admin) Fetches all bookings.
+-   `PUT /api/bookings/editbooking`: (Admin) Updates an existing booking.
+-   `DELETE /api/bookings/deletebooking`: (Admin) Deletes a booking.
