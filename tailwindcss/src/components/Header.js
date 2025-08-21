@@ -53,7 +53,9 @@ const Header = ({ openModal, isModalOpen, closeModal, cars, selectedCar, user, s
           <Link to="/details" className={`px-4 py-2 rounded-lg ${isActive('/details')} link-hover`}>Details</Link>
           <Link to="/about" className={`px-4 py-2 rounded-lg ${isActive('/about')} link-hover`}>About Us</Link>
           <Link to="/contact" className={`px-4 py-2 rounded-lg ${isActive('/contact')} link-hover`}>Contact Us</Link>
-          <Link to="/admin" className={`px-4 py-2 rounded-lg ${isActive('/admin')} link-hover`}>Admin</Link>
+          {user && user.role === 'admin' && (
+            <Link to="/admin" className={`px-4 py-2 rounded-lg ${isActive('/admin')} link-hover`}>Admin</Link>
+          )}
           {user ? (
             <button onClick={handleLogout} className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 link-hover">Logout</button>
           ) : (
@@ -73,7 +75,9 @@ const Header = ({ openModal, isModalOpen, closeModal, cars, selectedCar, user, s
               <Link to="/details" className={`px-4 py-2 rounded-lg ${isActive('/details')}`} onClick={closeMenu}>Details</Link>
               <Link to="/about" className={`px-4 py-2 rounded-lg ${isActive('/about')}`} onClick={closeMenu}>About Us</Link>
               <Link to="/contact" className={`px-4 py-2 rounded-lg ${isActive('/contact')}`} onClick={closeMenu}>Contact Us</Link>
-              <Link to="/admin" className={`px-4 py-2 rounded-lg ${isActive('/admin')}`} onClick={closeMenu}>Admin</Link>
+              {user && user.role === 'admin' && (
+                <Link to="/admin" className={`px-4 py-2 rounded-lg ${isActive('/admin')}`} onClick={closeMenu}>Admin</Link>
+              )}
               {user ? (
                 <button onClick={handleLogout} className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100">Logout</button>
               ) : (
